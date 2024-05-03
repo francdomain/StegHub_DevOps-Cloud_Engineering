@@ -1,1 +1,1 @@
-# StegHub_DevOps-Cloud_Engineering
+# StegHub DevOps/ Cloud Engineering
