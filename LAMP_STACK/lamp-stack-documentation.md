@@ -83,12 +83,16 @@ curl -s http://169.254.169.254/latest/meta-data/public-ipv4
 ```
 After running the command above, there was an error __401 - Unauthorized__ output.
 ![Unauthorized Error-401](./images/unauthorized-curl.png)
+
 In troubleshooting this error, the following navigation was made from the ec2 instance page on the AWS console:
+
 * Actions > Instance Settings > Modify instance metadata options.
 * Then change the __IMDSv2__ from __Required__ to __Optional__.
+
 ![imds option](./images/imds-option.png)
 
 The command was run again, this time there was no error with the public IP address displayed.
+
 ```
 curl -s http://169.254.169.254/latest/meta-data/public-ipv4
 ```
