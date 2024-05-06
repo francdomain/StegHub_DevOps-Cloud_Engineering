@@ -1,7 +1,8 @@
 ## WEB STACK IMPLEMENTATION (LAMP STACK) IN AWS
 
 ### Introduction:
-The LAMP stack is a popular open-source web development platform that consists of four main components: Linux, Apache, MySQL, and PHP (or sometimes Perl or Python). This documentation outlines the setup, configuration, and usage of the LAMP stack.
+
+__The LAMP stack is a popular open-source web development platform that consists of four main components: Linux, Apache, MySQL, and PHP (or sometimes Perl or Python). This documentation outlines the setup, configuration, and usage of the LAMP stack.__
 
 ## Step 0: Prerequisites
 
@@ -14,9 +15,9 @@ __2.__ Created SSH key pair named __my-ec2-key__ to access the instance on port 
 
 __3.__ The security group was configured with the following inbound rules:
 
-* Allow traffic on port 80 (HTTP) with source from anywhere on the internet.
-* Allow traffic on port 443 (HTTPS) with source from anywhere on the internet.
-* Allow traffic on port 22 (SSH) with source from any IP address. This is opened by default.
+- Allow traffic on port 80 (HTTP) with source from anywhere on the internet.
+- Allow traffic on port 443 (HTTPS) with source from anywhere on the internet.
+- Allow traffic on port 22 (SSH) with source from any IP address. This is opened by default.
 
 ![Security Rules](./images/security-rule.png)
 
@@ -86,8 +87,8 @@ After running the command above, there was an error __401 - Unauthorized__ outpu
 
 In troubleshooting this error, the following navigation was made from the ec2 instance page on the AWS console:
 
-* Actions > Instance Settings > Modify instance metadata options.
-* Then change the __IMDSv2__ from __Required__ to __Optional__.
+- Actions > Instance Settings > Modify instance metadata options.
+- Then change the __IMDSv2__ from __Required__ to __Optional__.
 
 ![imds option](./images/imds-option.png)
 
@@ -163,9 +164,9 @@ Apache is installed to serve the content and MySQL is installed to store and man
 PHP is the component of the set up that processes code to display dynamic content to the end user.
 
 The following were installed:
-* php package
-* php-mysql, a PHP module that allows PHP to communicate with MySQL-based databases.
-* libapache2-mod-php, to enable Apache to handle PHP files.
+- php package
+- php-mysql, a PHP module that allows PHP to communicate with MySQL-based databases.
+- libapache2-mod-php, to enable Apache to handle PHP files.
 ```
 sudo apt install php libapache2-mod-php php-mysql
 ```
