@@ -897,4 +897,8 @@ __Check them on the MongoDB database__
 
 ![Todo](./images/add-todo-db.png)
 
+### Conclusion
+
+By following this documentation and leveraging the provided resources, one is well-equipped to build and deploy full-fledged web applications utilizing the MERN stack.
+
 
