@@ -98,7 +98,7 @@ npm -v        // Gives the node package manager version
 
 __1.__ __Create a new directory for the TO-DO project and switch to it. Then initialize the project directory.__
 ```bash
-mkdir Todo && ls && cd
+mkdir Todo && ls && cd Todo
 
 npm init
 ```
