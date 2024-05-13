@@ -163,7 +163,7 @@ app.listen(port, () => {
 ```
 ![index.js code](./images/indexjs-file.png)
 
-__Note:__ The use of port 5000 have been specified to be used in the code. This will be required later when we go on the browser.
+__Note:__ Port 5000 have been specified to be used in the code. This was required later on the browser.
 
 __5.__ __Start the server to see if it works. Open your terminal in the same directory as your index.js file. Run__
 ```bash
