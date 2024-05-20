@@ -14,6 +14,7 @@ This repository is designed to be informative for both experienced professionals
 - Practical implementation of the LEMP web stack on AWS
 - Implementation of MERN web stack on AWS
 - MEAN stack deployment to Ubuntu in AWS
+- Client-Server Architecture with MySQL
 
 <br>
 <br>
