@@ -15,6 +15,7 @@ This repository is designed to be informative for both experienced professionals
 - Implementation of MERN web stack on AWS
 - MEAN stack deployment to Ubuntu in AWS
 - Client-Server Architecture with MySQL
+- Web Solution with WordPress
 
 <br>
 <br>

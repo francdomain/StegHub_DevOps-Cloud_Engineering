@@ -46,7 +46,7 @@ sudo gdisk /dev/xvdh
 ```
 ![partition](./images/h-part.png)
 
-__5b.__ __Use ```lsblk``` utility to view the newly configured partitions on each of the 3 disks
+__5b.__ __Use ```lsblk``` utility to view the newly configured partitions on each of the 3 disks__
 ```bash
 lsblk
 ```
