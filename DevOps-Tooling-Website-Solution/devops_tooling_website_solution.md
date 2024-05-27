@@ -365,7 +365,10 @@ sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 sudo systemctl status php-fpm
+
 sudo setsebool -P httpd_execmem 1
+sudo setsebool -P httpd_can_network_connect=1
+sudo setsebool -P httpd_can_network_connect_db=1
 ```
 ![start php](./images/start-php-fpm.png)
 
