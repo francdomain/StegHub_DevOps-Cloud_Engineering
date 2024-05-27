@@ -366,9 +366,9 @@ sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 sudo systemctl status php-fpm
 
-sudo setsebool -P httpd_execmem 1
-sudo setsebool -P httpd_can_network_connect=1
-sudo setsebool -P httpd_can_network_connect_db=1
+sudo setsebool -P httpd_execmem 1  # Allows the Apache HTTP server (httpd) to execute memory that it can also write to. This is often needed for certain types of dynamic content and applications that may need to generate and execute code at runtime.
+sudo setsebool -P httpd_can_network_connect=1   # Allows the Apache HTTP server to make network connections to other servers.
+sudo setsebool -P httpd_can_network_connect_db=1  # allows the Apache HTTP server to connect to remote database servers.
 ```
 ![start php](./images/start-php-fpm.png)
 
