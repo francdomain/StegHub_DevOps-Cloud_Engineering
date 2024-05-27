@@ -118,7 +118,7 @@ lsblk
 ```
 ![List Block](./images/lsblk3.png)
 
-#### Use ```mkfs -t xfs``` to format the logical volumes with ext4 filesystem
+#### Use ```mkfs -t xfs``` to format the logical volumes instead of ext4 filesystem
 
 ```bash
 sudo mkfs -t xfs /dev/webdata-vg/lv-apps
