@@ -525,7 +525,7 @@ sudo setsebool -P httpd_execmem 1
 ![start php](./images/start-php-fpm-web3.png)
 
 
-__6.__ __Verify that Apache files and directories are availabel on the Web Servers in ```/var/www``` and also on the NFS Server in ```/mnt/apps```. If the same files are present in both, it means NFS was mounted correctly.
+__6.__ __Verify that Apache files and directories are availabel on the Web Servers in ```/var/www``` and also on the NFS Server in ```/mnt/apps```. If the same files are present in both, it means NFS was mounted correctly.__
 test.txt file was created from Web Server 1, and it was accessible from Web Server 2.
 
 ![create file](./images/create-test-file.png)
@@ -574,11 +574,11 @@ sudo systemctl restart httpd
 ![disable selinux](./images/disable-selinux.png)
 
 
-__10.__ __Update the website's configuration to connect to the database (in ```/var/www/html/function.php``` file). Apply ```tooling-db.sql``` command
+__10.__ __Update the website's configuration to connect to the database (in ```/var/www/html/function.php``` file). Apply ```tooling-db.sql``` command__
 ```sudo mysql -h <db-private-IP> -u <db-username> -p <db-password < tooling-db.sql```
 
 ```bash
-sudo vi /var/www/html/function.php
+sudo vi /var/www/html/functions.php
 ```
 ![fn config](./images/config-function-php.png)
 
