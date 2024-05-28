@@ -550,6 +550,8 @@ __9.__ __Deploy the tooling Website's code to the Web Server. Ensure that the ``
 
 #### Initialize the directory and clone the tooling repository
 
+Ensure to clone the forked repository
+
 ![git init](./images/git-init.png)
 
 ![html](./images/html-deploy.png)
