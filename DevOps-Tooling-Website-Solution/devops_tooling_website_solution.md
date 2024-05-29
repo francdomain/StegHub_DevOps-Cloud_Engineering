@@ -534,6 +534,15 @@ test.txt file was created from Web Server 1, and it was accessible from Web Serv
 
 __7.__ __Locate the log folder for Apache on the Web Server and mount it to NFS server's export for logs. Repeat ```step 4``` to ensure the mount point persists after reboot__.
 
+```bash
+sudo vi /etc/fstab
+```
+
+Add the following line
+```bash
+172.31.1.209:/mnt/logs /var/log/httpd nfs defaults 0 0
+```
+
 ![mount logs](./images/mount-logs-web1.png)
 ![persist logs](./images/persist-config2.png)
 
@@ -599,7 +608,7 @@ sudo mysql -h 172.31.8.129 -u webaccess -p
 __11.__ __Create in MyQSL a new admin user with username: ```myuser``` and password: ```password```__
 
 ```bash
-INSERT INTO users(`id`, `username`, `password`, `email`, `user_type`, `status`) VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
+INSERT INTO users(id, username, password, email, user_type, status) VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
 ```
 ![insert rows](./images/insert-rows.png)
 
