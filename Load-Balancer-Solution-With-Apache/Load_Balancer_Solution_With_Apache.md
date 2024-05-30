@@ -97,7 +97,7 @@ sudo vi /etc/apache2/sites-available/000-default.conf
 ```
 ### ii. Add this configuration into the section ```<VirtualHost *:80>  </VirtualHost>```
 
-```bash
+```apache
 <Proxy “balancer://mycluster”>
             BalancerMember http://172.31.46.91:80 loadfactor=5 timeout=1
            BalancerMember http://172.31.43.221:80 loadfactor=5 timeout=1
@@ -142,6 +142,9 @@ df -h
 sudo umount -f /var/log/httpd
 ```
 If the directory is busy, the services using it needs to be stopped first.
+```bash
+sudo systemctl stop httpd
+```
 
 - Check that the directory is unmounted
 ```bash
