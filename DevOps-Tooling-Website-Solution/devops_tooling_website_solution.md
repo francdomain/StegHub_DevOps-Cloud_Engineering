@@ -245,7 +245,7 @@ __3.__ __Create a database user and name it ```webaccess```__
 
 __4.__ __Grant permission to ```webaccess``` user on ```tooling``` database to do anything only from the webservers ```subnet cidr```__
 
-```bash
+```sql
 sudo mysql
 
 CREATE DATABASE tooling;
@@ -593,21 +593,21 @@ sudo vi /var/www/html/functions.php
 ```
 ![fn config](./images/config-function-php.png)
 
-```bash
+```sql
 sudo mysql -h 172.31.8.129 -u webaccess -p tooling < tooling-db.sql
 ```
 ![](./images/tooling-script-db.png)
 
 #### Access the database server from Web Server
 
-```bash
+```sql
 sudo mysql -h 172.31.8.129 -u webaccess -p
 ```
 ![web to db](./images/access-db-web1.png)
 
 __11.__ __Create in MyQSL a new admin user with username: ```myuser``` and password: ```password```__
 
-```bash
+```sql
 INSERT INTO users(id, username, password, email, user_type, status) VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
 ```
 ![insert rows](./images/insert-rows.png)
