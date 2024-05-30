@@ -23,19 +23,19 @@ Ensure that the following servers are installedd and configure already.
 - All neccessary TCP/UDP ports are opened on Web, DB and NFS Servers.
 - Client browsers can access both Web Servers by their Public IP addresses or Public DNS names and can open the ```Tooling Website``` (e.g, ```http://<Public-IP-Address-or-Public-DNS-Name>/index.php```)
 
-## Step 1 - Configure Apache As A Load Balancer
+# Step 1 - Configure Apache As A Load Balancer
 
-### 1. Create an Ubuntu Server 24.04 EC2 instance and name it Project-8-apache-lb
+## 1. Create an Ubuntu Server 24.04 EC2 instance and name it Project-8-apache-lb
 
 ![ec2 lb](./images/ec2-lb-detail.png)
 
-### 2. Open TCP port 80 on Project-8-apache-lb by creating an Inbounb Rule in Security Group
+## 2. Open TCP port 80 on Project-8-apache-lb by creating an Inbounb Rule in Security Group
 
 ![Port 80](./images/lb-security-rule.png)
 
-### 3. Instal Apache Load Balancer on Project-8-apache-lb and configure it to point traffic coming to LB to both Web Servers.
+## 3. Instal Apache Load Balancer on Project-8-apache-lb and configure it to point traffic coming to LB to both Web Servers.
 
-__i. Install Apache2__
+### i. Install Apache2
 
 - Access the instance
 
@@ -63,7 +63,7 @@ sudo apt-get install libxml2-dev
 ```
 ![Apache dependencies](./images/install-dependencies.png)
 
-__ii. Enable the following modules__
+### ii. Enable the following modules
 
 ```bash
 sudo a2enmod rewrite
@@ -80,7 +80,7 @@ sudo a2enmod  lbmethod_bytraffic
 ```
 ![modules](./images/enable-modules.png)
 
-__iii. Restart Apache2 Service__
+### iii. Restart Apache2 Service
 
 ```bash
 sudo systemctl restart apache2
@@ -90,12 +90,12 @@ sudo systemctl status apache2
 
 ## Configure Load Balancing
 
-__i. Open the file 000-default.conf in sites-available__
+### i. Open the file 000-default.conf in sites-available
 
 ```bash
 sudo vi /etc/apache2/sites-available/000-default.conf
 ```
-__ii. Add this configuration into the section ```<VirtualHost *:80>  </VirtualHost>```__
+### ii. Add this configuration into the section ```<VirtualHost *:80>  </VirtualHost>```
 
 ```bash
 <Proxy “balancer://mycluster”>
@@ -112,7 +112,7 @@ ProxyPassReverse / balancer://mycluster/
 ```
 ![Server config](./images/apache-server-config.png)
 
-__iii. Restart Apache__
+### iii. Restart Apache
 
 ```bash
 sudo systemctl restart apache2
@@ -124,16 +124,16 @@ sudo systemctl restart apache2
 Other methods such as ```bybusyness```, ```byrequests```, ```heartbeat``` can also be adopted.
 
 
-### 4. Verify that the configuration works
+## 4. Verify that the configuration works
 
-__i. Access the website using the LB's Public IP address or the Public DNS name from a browser__
+### i. Access the website using the LB's Public IP address or the Public DNS name from a browser
 
 ![lb public ip](./images/lb-public-ip.png)
 ![lb-website](./images/lb-wesite.png)
 
 __Note__: If in the previous project, ```/var/log/httpd``` was mounted from the Web Server to the NFS Server, unmount them and ensure that each Web Servers has its own log directory.
 
-__ii. Unmount the NFS directory__
+### ii. Unmount the NFS directory
 
 - Check if the Web Server's log directory is mounted to NSF
 
@@ -149,7 +149,7 @@ df -h
 ```
 ![unmount](./images/unmount.png)
 
-__iii. Open two ssh consoles for both Web Server and run the command:__
+### iii. Open two ssh consoles for both Web Server and run the command:
 
 ```bash
 sudo tail -f /var/log/httpd/access_log
@@ -160,7 +160,7 @@ Wbe Server 1 ```access_log```
 Wbe Server 2 ```access_log```
 ![web1 accesslog](./images/access-log-web2-1.png)
 
-__iv. Refresh the browser page several times and ensure both Web Servers receive HTTP and GET requests. New records must apear in each web server log files. The number of request to each servers will be approximately the same since ```loadfactor``` is set to the same value for both servers. This means that traffic will be evenly distributed between them__.
+### iv. Refresh the browser page several times and ensure both Web Servers receive HTTP and GET requests. New records must apear in each web server log files. The number of request to each servers will be approximately the same since ```loadfactor``` is set to the same value for both servers. This means that traffic will be evenly distributed between them.
 
 Web Server 1 ```access_log```
 ![logs](./images/access-log-web1-2.png)
@@ -169,23 +169,23 @@ Web Server 2 ```access_log```
 ![logs](./images/access-log-web2-2.png)
 
 
-## Optional Step - Configure Local DNS Names Resolution
+# Optional Step - Configure Local DNS Names Resolution
 
 Sometimes it is tedious to remember and switch between IP addresses, especially if there are lots of servers to manage. It is best to configure local domain name resolution. The easiest way is use ```/etc/hosts``` file, although this approach is not very scalable, but it is very easy to configure and shows the concept well.
 
-### Configure the IP address to domain name mapping for our Load Balancer.
+## Configure the IP address to domain name mapping for our Load Balancer.
 
-- __Open the hosts file__
+### Open the hosts file
 
 ```bash
 sudo vi /etc/hosts
 ```
 
-- __Add two records into file with Local IP address and arbitrary name for the Web Servers__
+### Add two records into file with Local IP address and arbitrary name for the Web Servers
 
 ![dns host](./images/dns-hosts.png)
 
-- __Update the LB config file with those arbitrary names instead of IP addresses__
+### Update the LB config file with those arbitrary names instead of IP addresses
 
 ```bash
 sudo vi /etc/apache2/sites-available/000-default.conf
