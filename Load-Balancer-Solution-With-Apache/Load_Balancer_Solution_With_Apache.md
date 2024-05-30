@@ -35,17 +35,23 @@ Ensure that the following servers are installedd and configure already.
 
 ### 3. Instal Apache Load Balancer on Project-8-apache-lb and configure it to point traffic coming to LB to both Web Servers.
 
-__Install Apache2__
+__i. Install Apache2__
+
+- Access the instance
 
 ```bash
 ssh -i "my-devec2key.pem" ec2-user@18.219.148.178
 ```
 ![ssh](./images/ssh-lb.png)
 
+- Update and upgrade Ubuntu
+
 ```bash
 sudo apt update && sudo apt upgrade
 ```
 ![update ubuntu](./images/update-upgrade-lb.png)
+
+- Install Apache
 
 ```bash
 sudo apt install apache2 -y
@@ -57,7 +63,7 @@ sudo apt-get install libxml2-dev
 ```
 ![Apache dependencies](./images/install-dependencies.png)
 
-__Enable the following modules__
+__ii. Enable the following modules__
 
 ```bash
 sudo a2enmod rewrite
@@ -74,7 +80,7 @@ sudo a2enmod  lbmethod_bytraffic
 ```
 ![modules](./images/enable-modules.png)
 
-__Restart Apache2 Service__
+__iii. Restart Apache2 Service__
 
 ```bash
 sudo systemctl restart apache2
@@ -82,14 +88,14 @@ sudo systemctl status apache2
 ```
 ![Restart apache](./images/restart-apache.png)
 
-### Configure Load Balancing
+## Configure Load Balancing
 
-__Open the file 000-default.conf in sites-available__
+__i. Open the file 000-default.conf in sites-available__
 
 ```bash
 sudo vi /etc/apache2/sites-available/000-default.conf
 ```
-__Add this configuration into the section ```<VirtualHost *:80>  </VirtualHost>```__
+__ii. Add this configuration into the section ```<VirtualHost *:80>  </VirtualHost>```__
 
 ```bash
 <Proxy “balancer://mycluster”>
@@ -106,7 +112,7 @@ ProxyPassReverse / balancer://mycluster/
 ```
 ![Server config](./images/apache-server-config.png)
 
-__Restart Apache__
+__iii. Restart Apache__
 
 ```bash
 sudo systemctl restart apache2
@@ -120,14 +126,14 @@ Other methods such as ```bybusyness```, ```byrequests```, ```heartbeat``` can al
 
 ### 4. Verify that the configuration works
 
-__Access the website using the LB's Public IP address or the Public DNS name from a browser__
+__i. Access the website using the LB's Public IP address or the Public DNS name from a browser__
 
 ![lb public ip](./images/lb-public-ip.png)
 ![lb-website](./images/lb-wesite.png)
 
 __Note__: If in the previous project, ```/var/log/httpd``` was mounted from the Web Server to the NFS Server, unmount them and ensure that each Web Servers has its own log directory.
 
-__Unmount the NFS directory__
+__ii. Unmount the NFS directory__
 
 - Check if the Web Server's log directory is mounted to NSF
 
@@ -143,7 +149,7 @@ df -h
 ```
 ![unmount](./images/unmount.png)
 
-__Open two ssh consoles for both Web Server and run the command:__
+__iii. Open two ssh consoles for both Web Server and run the command:__
 
 ```bash
 sudo tail -f /var/log/httpd/access_log
@@ -154,7 +160,7 @@ Wbe Server 1 ```access_log```
 Wbe Server 2 ```access_log```
 ![web1 accesslog](./images/access-log-web2-1.png)
 
-__Refresh the browser page several times and ensure both Web Servers receive HTTP and GET requests. New records must apear in each web server log files. The number of request to each servers will be approximately the same since ```loadfactor``` is set to the same value for both servers. This means that traffic will be evenly distributed between them__.
+__iv. Refresh the browser page several times and ensure both Web Servers receive HTTP and GET requests. New records must apear in each web server log files. The number of request to each servers will be approximately the same since ```loadfactor``` is set to the same value for both servers. This means that traffic will be evenly distributed between them__.
 
 Web Server 1 ```access_log```
 ![logs](./images/access-log-web1-2.png)
