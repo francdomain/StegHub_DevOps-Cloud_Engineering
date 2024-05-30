@@ -10,13 +10,24 @@ This repository is designed to be informative for both experienced professionals
 
 ### Key Areas Covered
 
-- Practical implementation of the LAMP web stack on AWS
-- Practical implementation of the LEMP web stack on AWS
-- Implementation of MERN web stack on AWS
-- MEAN stack deployment to Ubuntu in AWS
-- Client-Server Architecture with MySQL
-- Web Solution with WordPress
+- __Implementation of the LAMP web stack on AWS__ - Successfully deployed a LAMP (Linux, Apache, MySQL, PHP) stack on an AWS EC2 instance, enabling a robust environment for hosting web applications.
+
+- __LEMP web stack on AWS__ - Implemented a LEMP (Linux, Nginx, MySQL, PHP) stack on an AWS EC2 instance, optimizing performance for high-traffic websites.
+
+- __Implementation of MERN web stack on AWS__ - Deployed a TODO web application using the MERN (MongoDB, Express.js, React, Node.js) stack on AWS EC2, providing a full-stack JavaScript solution.
+
+- __MEAN stack deployment to Ubuntu in AWS__ - Deployed a Book Register Web Form using the MEAN (MongoDB, Express.js, Angular, Node.js) stack on AWS EC2.
+
+- __Client-Server Architecture with MySQL__ - Deployed a scalable Client Server Architecture on AWS EC2 instance, ensuring efficient client-server communication and data management.
+
+- __Web Solution with WordPress__ - Deployed a WordPress-based web solution using a 3-Tier architecture on AWS EC2 instances, ensuring proper disk partitioning and management with tools like gdisk and LVM.
+
+- __DevOps Tooling Website Solution__ - Deployed a DevOps Tooling Website using a 3-Tier architecture on AWS EC2 instances, facilitating easy access to DevOps tools within a corporate infrastructure.
+
+- __Load Balancer Solution With Apache__ - Configured a load balancer solution with Apache for the DevOps Tooling Website, distributing traffic effectively between web servers and enabling access through a single URL.
+
 
 <br>
 <br>
 #StegHub #DevOps #Cloud Engineering
+
