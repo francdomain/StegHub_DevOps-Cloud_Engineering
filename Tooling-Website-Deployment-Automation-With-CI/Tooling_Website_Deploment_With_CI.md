@@ -1,4 +1,4 @@
-# Tooling Website deployment automation with Continuous Integration
+# Tooling Website deployment automation with Continuous Integration using Jenkins
 
 In this project we are going to start automating part of our routine tasks with a free and open source automation server - Jenkins. It is one of the mostl popular CI/CD tools.
 
@@ -108,7 +108,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 ![](./images/unlock-jenkins.png)
 
-The you will be askedwhich plugins to install - choose suggested plugins
+Then you will be asked which plugins to install - choose suggested plugins
 
 ![](./images/install-plugins.png)
 ![](./images/installing-plugins.png)
