@@ -117,7 +117,7 @@ In order to get a valid SSL certificate we need to register a new domain name, w
 
 ### 1. Register a new domain name with any registrar of your choice in any domain zone. (e.g .com, .net, .org, .edu, info, .xyz or any other)
 
-[Coudns.net](https://www.cloudns.net/) is the domain name registrar used for this project.
+[Cloudns.net](https://www.cloudns.net/) is the domain name registrar used for this project.
 
 ![](./images/register-for-dns.png)
 ![](./images/create-dns.png)
