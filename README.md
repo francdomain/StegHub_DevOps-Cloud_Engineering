@@ -26,8 +26,14 @@ This repository is designed to be informative for both experienced professionals
 
 - __Load Balancer Solution With Apache__ - Configured a load balancer solution with Apache for the DevOps Tooling Website, distributing traffic effectively between web servers and enabling access through a single URL.
 
+- __Tooling Website Deployment Automation and Continuous Integration with Jenkins__ - Implemented and managed automated Tooling website deployment and continuous integration processes using Jenkins.
+
+- __Load Balancer Solution with Nginx and SSL/TLS__ - Developed and deployed a load balancer solution using Nginx with SSL/TLS for secure and efficient traffic distribution.
+
 
 <br>
 <br>
-#StegHub #DevOps #Cloud Engineering
+
+
+#StegHub#DevOps#Cloud Engineering
 
