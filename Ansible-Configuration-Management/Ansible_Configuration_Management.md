@@ -107,6 +107,10 @@ Associate the elastic IP
 
 ![](./images/elastic-ip-associated.png)
 
+Update the webhook
+
+![](./images/update-webhook-config.png)
+
 __Note:__ Elastic IP is free only when it is being allocated to an EC2 Instance, so do not forget to release Elastic IP once you terminate your EC2 Instance.
 
 
