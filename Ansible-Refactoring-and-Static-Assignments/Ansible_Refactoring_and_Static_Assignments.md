@@ -325,44 +325,58 @@ To learn how to setup SSH agent and connect VS Code to your Jenkins-Ansible inst
 - Ensure the tooling website code is deployed to /var/www/html on each of 2 UAT Web servers.
 - Make sure httpd service is started
 
-Your main.yml may consist of following tasks:
+Your main.yml consist of following tasks:
 
 ```yaml
+# tasks file for webserver
 ---
 - name: install apache
+  remote_user: ec2-user
   become: true
+  become_user: root
   ansible.builtin.yum:
     name: "httpd"
     state: present
 
 - name: install git
+  remote_user: ec2-user
   become: true
+  become_user: root
   ansible.builtin.yum:
     name: "git"
     state: present
 
 - name: clone a repo
+  remote_user: ec2-user
   become: true
+  become_user: root
   ansible.builtin.git:
-    repo: https://github.com/<your-name>/tooling.git
+    repo: https://github.com/francdomain/tooling.git
     dest: /var/www/html
     force: yes
 
 - name: copy html content to one level up
+  remote_user: ec2-user
   become: true
+  become_user: root
   command: cp -r /var/www/html/html/ /var/www/
 
 - name: Start service httpd, if not started
+  remote_user: ec2-user
   become: true
+  become_user: root
   ansible.builtin.service:
     name: httpd
     state: started
 
 - name: recursively remove /var/www/html/html/ directory
+  remote_user: ec2-user
   become: true
+  become_user: root
   ansible.builtin.file:
     path: /var/www/html/html
     state: absent
+
 ```
 ![](./images/task-main.png)
 
@@ -436,5 +450,4 @@ __Access Web2-UAT__
 __Our Ansible architecture now looks like this:__
 
 ![](./images/architecture1.png)
-
 
