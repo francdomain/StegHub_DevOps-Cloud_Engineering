@@ -42,9 +42,17 @@ Take note that in most cases it is recommended to use `static assignments` for p
 
 In your `https://github.com/<your-name>/ansible-config-mgt` GitHub repository start a new branch and call it `dynamic-assignments`.
 
+```bash
+git checkout -b dynamic-assignments
+```
+
 Create a new folder, name it `dynamic-assignments`.
 Then inside this folder, create a new file and name it `env-vars.yml`. We will instruct `site.yml` to `include` this playbook later. For now, let us keep building up the structure.
 
+```bash
+mkdir dynamic-assignments
+touch dynamic-assignments/env-vars.yml
+```
 ![](./images/create-dynamic-assignment.png)
 
 Your GitHub shall have following structure by now.
@@ -205,7 +213,7 @@ git switch roles-feature
 ![](./images/create-roles-feature-branch.png)
 ![](./images/roles-feature-branch.png)
 
-Inside `roles` directory create your new `MySQL role` with `ansible-galaxy` install `geerlingguy.mysql` and rename the folder to `mysql`
+__Inside `roles` directory create your new `MySQL role` with `ansible-galaxy` install `geerlingguy.mysql` and rename the folder to `mysql`__
 
 ```bash
 ansible-galaxy role install geerlingguy.mysql
@@ -255,7 +263,7 @@ __Now, if you are satisfied with your codes, you can create a Pull Request and m
 ![](./images/git-merge.png)
 
 
-## Load Balancer roles
+# Load Balancer roles
 
 We want to be able to choose which Load Balancer to use, `Nginx` or `Apache`, so we need to have two roles respectively:
 
@@ -445,7 +453,7 @@ db ansible_host=172.31.2.161 ansible_ssh_user='ubuntu'
 ```
 ![](./images/inventory-uat.png)
 
-__Update Webservers Role in `roles/webservers/tasks/main.yml` to install Epel, Remi's repoeitory, Apache, PHP, git and clone tooling website github repository__
+__Update Webservers Role in `roles/webservers/tasks/main.yml` to install Epel, Remi's repoeitory, Apache, and PHP__
 
 ![](./images/update-webserver-role.png)
 
