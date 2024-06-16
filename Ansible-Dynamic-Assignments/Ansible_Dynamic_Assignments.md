@@ -532,6 +532,8 @@ INSERT INTO users(id, username, password, email, user_type, status) VALUES (2, '
 
 The same must work with apache LB, so you can switch it by setting respective environmental variable to true and other to false.
 
+To test this, you can update inventory for each environment and run Ansible against each environment.
+
 
 # Set up for Apache Load Balancer
 
@@ -643,25 +645,4 @@ sudo vi /etc/apache2/sites-available/000-default.conf
 ![](./images/apache-lb-website.png)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-To test this, you can update inventory for each environment and run Ansible against each environment.
-
-
-
-
-
-
-
-
-
+We have learned and practiced how to use Ansible configuration management tool to prepare UAT environment for Tooling web solution.
