@@ -20,6 +20,9 @@ Load balancer server
 Load balancer security group inbound rule
 ![](./images/lb-security-rule.png)
 
+DB
+![](./images/ec2-db-detail.png)
+
 
 From [previous project](https://steghub.com/lessons/ansible-refactoring-static-assignments-imports-and-roles-101/), we can already tell that static assignments use `import` Ansible module. The module that enables dynamic assignments is `include`.
 
@@ -442,9 +445,10 @@ db ansible_host=172.31.2.161 ansible_ssh_user='ubuntu'
 ```
 ![](./images/inventory-uat.png)
 
-__Update Webserver Role__
+__Update Webservers Role in `roles/webservers/tasks/main.yml` to install Epel, Remi's repoeitory, Apache, PHP, git and clone tooling website github repository__
 
 ![](./images/update-webserver-role.png)
+
 
 __Update `roles/nginx/tasks/main.yml` to create a task that check and stop apache if it is running__
 
@@ -494,7 +498,33 @@ sudo vi /etc/nginx/nginx.conf
 ```
 ![](./images/nginx-vhost.png)
 
-### Access the tooling website using the LB's Public IP address
+
+Update the website's configuration to connect to the database (in /var/www/html/function.php file)
+
+```bash
+sudo vi /var/www/html/functions.php
+```
+![](./images/func-db-conn.png)
+
+Apply tooling-db.sql command on the webseveers
+
+```bash
+sudo mysql -h 172.31.2.161 -u webaccess -p tooling < tooling-db.sql
+```
+
+__Access the database server from Web Server__
+
+```bash
+sudo mysql -h 172.31.2.161 -u webaccess -p
+```
+
+__Create in MyQSL a new admin user with username: myuser and password: password__
+
+```SQL
+INSERT INTO users(id, username, password, email, user_type, status) VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
+```
+
+### Access the tooling website using the LB's Public IP address on a browser
 
 ![](./images/lb-ip.png)
 ![](./images/nginx-lb-login.png)
