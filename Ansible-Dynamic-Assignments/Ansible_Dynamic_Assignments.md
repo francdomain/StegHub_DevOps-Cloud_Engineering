@@ -757,7 +757,7 @@ Configure Apache virtual host
 ![](./images/apache-vhost-config.png)
 
 
-### Update env-vars/uat.yml
+### Enable Apache (in `env-vars/uat.yml`)
 
 #### Switch Apache to true and nginx to false
 
