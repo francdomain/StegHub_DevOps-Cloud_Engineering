@@ -20,7 +20,7 @@ Load balancer server
 Load balancer security group inbound rule
 ![](./images/lb-security-rule.png)
 
-DB
+Database server
 ![](./images/ec2-db-detail.png)
 
 
@@ -193,7 +193,7 @@ HostName = Jenkins-Ansible Public IP Address
 
 ![](./images/conn-remote-ansible.png)
 
-Select the target directory
+Click on `Open Folder` and Select `ansible-config-mgt`
 ![](./images/select-dir.png)
 
 On `Jenkins-Ansible` server make sure that `git` is installed with `git --version`, then go to `ansible-config-mgt` directory and run
