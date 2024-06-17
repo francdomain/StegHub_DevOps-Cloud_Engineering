@@ -324,13 +324,25 @@ __Important Hints:__
 - Set both values to `false` like this `enable_nginx_lb: false` and `enable_apache_lb: false`.
 - Declare another variable in both roles `load_balancer_is_required` and set its value to `false` as well
 
-For nginx
+### For nginx
+
+```yaml
+# roles/nginx/defaults/main.yml
+enable_nginx_lb: false
+load_balancer_is_required: false
+```
 ![](./images/defaults-main-nginx.png)
 
-For apache
+### For apache
+
+```yaml
+# roles/apache/defaults/main.yml
+enable_apache_lb: false
+load_balancer_is_required: false
+```
 ![](./images/defaults-main-apache.png)
 
-- Update assignment
+### Update assignment
 
 `loadbalancers.yml` file
 
