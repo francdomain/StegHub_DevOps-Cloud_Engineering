@@ -213,7 +213,7 @@ git switch roles-feature
 ![](./images/create-roles-feature-branch.png)
 ![](./images/roles-feature-branch.png)
 
-__Inside `roles` directory create your new `MySQL role` with `ansible-galaxy` install `geerlingguy.mysql` and rename the folder to `mysql`__
+__Inside `roles` directory create your new `MySQL role` with `ansible-galaxy` install `geerlingguy.mysql`__
 
 ```bash
 ansible-galaxy role install geerlingguy.mysql
@@ -221,6 +221,8 @@ ansible-galaxy role install geerlingguy.mysql
 ![](./images/geerlingguy-mysql.png)
 
 ![](./images/install-msql-role.png)
+
+__Rename the folder to `mysql`__
 
 ```bash
 mv geerlingguy.mysql/ mysql
@@ -246,6 +248,18 @@ mysql_users:
 ```
 ![](./images/db-conn.png)
 
+__Create a new playbook inside `static-assignments` folder and name it `db-servers.yml` , update it with `mysql` roles.__
+
+```yaml
+- hosts: db_servers
+  become: yes
+  vars_files:
+    - vars/main.yml
+  roles:
+    - { role: mysql }
+```
+![](./images/db-playbook.png)
+
 __Now it is time to upload the changes into your GitHub:__
 
 ```bash
@@ -257,9 +271,11 @@ git push --set-upstream origin roles-feature
 ![](./images/git-add-commit.png)
 ![](./images/git-push.png)
 
-__Now, if you are satisfied with your codes, you can create a Pull Request and merge it to `main` branch on GitHub.__
+__Now, if you are satisfied with your codes, you can create a Pull Request.__
 
 ![](./images/pull-request.png)
+
+__Merge it to `main` branch on GitHub__
 ![](./images/git-merge.png)
 
 
@@ -295,7 +311,11 @@ mv geerlingguy.apache apache
 ```
 ![](./images/rename-nginx-apache-role.png)
 
-- Update both static-assignment and site.yml files to refer the roles
+__The folder structure now looks like this__
+
+![](./images/folder-structure.png)
+
+- __Update both static-assignment and site.yml files to refer the roles__
 
 __Important Hints:__
 
