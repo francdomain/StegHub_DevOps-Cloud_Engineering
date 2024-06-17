@@ -387,7 +387,7 @@ Now you can make use of `env-vars\uat.yml` file to define which `loadbalancer` t
 
 You will activate load balancer, and enable `nginx` by setting these in the respective environment's `env-vars` file.
 
-__Enable Nginx__
+### Enable Nginx
 
 ```yaml
 enable_nginx_lb: true
@@ -398,7 +398,7 @@ load_balancer_is_required: true
 
 # Set up for Nginx Load Balancer
 
-### Update roles/nginx/defaults/main.yml
+### Update `roles/nginx/defaults/main.yml`
 
 __Configure Nginx virtuel host__
 
@@ -485,8 +485,138 @@ db ansible_host=172.31.2.161 ansible_ssh_user='ubuntu'
 ```
 ![](./images/inventory-uat.png)
 
-__Update Webservers Role in `roles/webservers/tasks/main.yml` to install Epel, Remi's repoeitory, Apache, and PHP__
+### Update Webservers Role in `roles/webservers/tasks/main.yml` to install Epel, Remi's repoeitory, Apache, PHP and clone the tooling website from your GitHub repository
 
+```yaml
+---
+- name: install apache
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.yum:
+    name: "httpd"
+    state: present
+
+- name: Enable apache
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.command:
+    cmd: sudo systemctl enable httpd
+
+- name: Install EPEL release
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.command:
+    cmd: sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm -y
+
+- name: Install dnf-utils and Remi repository
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.command:
+    cmd: sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm -y
+
+- name: Reset PHP module
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.command:
+    cmd: sudo dnf module reset php -y
+
+- name: Enable PHP 8.2 module
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.command:
+    cmd: sudo dnf module enable php:remi-8.2 -y
+
+- name: Install PHP and extensions
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.yum:
+    name:
+      - php
+      - php-opcache
+      - php-gd
+      - php-curl
+      - php-mysqlnd
+    state: present
+
+- name: Install MySQL client
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.yum:
+    name: "mysql"
+    state: present
+
+- name: Start PHP-FPM service
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.service:
+    name: php-fpm
+    state: started
+
+- name: Enable PHP-FPM service
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.service:
+    name: php-fpm
+    enabled: true
+
+- name: Set SELinux policies for web servers
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.command:
+    cmd: sudo setsebool -P httpd_execmem 1
+    cmd: sudo setsebool -P httpd_can_network_connect=1
+    cmd: sudo setsebool -P httpd_can_network_connect_db=1
+
+- name: install git
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.yum:
+    name: "git"
+    state: present
+
+- name: clone a repo
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.git:
+    repo: https://github.com/francdomain/tooling.git
+    dest: /var/www/html
+    force: yes
+
+- name: copy html content to one level up
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  command: cp -r /var/www/html/html/ /var/www/
+
+- name: Start service httpd, if not started
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.service:
+    name: httpd
+    state: started
+
+- name: recursively remove /var/www/html/html/ directory
+  remote_user: ec2-user
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    path: /var/www/html/html
+    state: absent
+```
 ![](./images/update-webserver-role.png)
 
 
