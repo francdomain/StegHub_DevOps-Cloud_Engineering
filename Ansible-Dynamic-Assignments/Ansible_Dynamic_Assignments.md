@@ -400,7 +400,7 @@ load_balancer_is_required: true
 
 ### Update `roles/nginx/defaults/main.yml`
 
-__Configure Nginx virtuel host__
+__Configure Nginx virtual host__
 
 ```yaml
 ---
@@ -657,7 +657,7 @@ ssh -i "my-devec2key.pem" ubuntu@3.145.48.108
 ```
 ![](./images/ssh-lb.png)
 
-__Check Nginx and Apache status__
+### Check Nginx and Apache status
 
 ![](./images/stop-apache-server.png)
 
@@ -757,9 +757,9 @@ Configure Apache virtual host
 ![](./images/apache-vhost-config.png)
 
 
-__Update env-vars/uat.yml__
+### Update env-vars/uat.yml
 
-Switch Apache to true and nginx to false
+#### Switch Apache to true and nginx to false
 
 ![](./images/apache-true.png)
 
@@ -779,6 +779,8 @@ __Update `roles/apache/tasks/main.yml` to create a task that check and stop ngin
   become: yes
 ```
 ![](./images/stop-nginx.png)
+
+### Comment out the references for the db-servers and uat-webservers playbook in site.yml file in order not to rerun the tasks. Only the reference to import the load balancer playbook should be left.
 
 ### Now run the playbook against the uat inventory
 
