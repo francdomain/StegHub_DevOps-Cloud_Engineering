@@ -816,5 +816,6 @@ sudo vi /etc/apache2/sites-available/000-default.conf
 ![](./images/apache-lb-login.png)
 ![](./images/apache-lb-website.png)
 
+### Conclusion
 
 We have learned and practiced how to use Ansible configuration management tool to prepare UAT environment for Tooling web solution.
