@@ -213,7 +213,7 @@ git switch roles-feature
 ![](./images/create-roles-feature-branch.png)
 ![](./images/roles-feature-branch.png)
 
-__Inside `roles` directory create your new `MySQL role` with `ansible-galaxy` install `geerlingguy.mysql`__
+### Inside `roles` directory create your new `MySQL role` with `ansible-galaxy` install `geerlingguy.mysql`
 
 ```bash
 ansible-galaxy role install geerlingguy.mysql
@@ -232,7 +232,7 @@ mv geerlingguy.mysql/ mysql
 
 Read README.md file, and edit roles configuration to use correct credentials for MySQL required for the tooling website.
 
-__Create Database and mysql user (`roles/mysql/vars/main.yml`)__
+### Create Database and mysql user (`roles/mysql/vars/main.yml`)
 
 ```yaml
 mysql_root_password: ""
@@ -248,7 +248,7 @@ mysql_users:
 ```
 ![](./images/db-conn.png)
 
-__Create a new playbook inside `static-assignments` folder and name it `db-servers.yml` , update it with `mysql` roles.__
+### Create a new playbook inside `static-assignments` folder and name it `db-servers.yml` , update it with `mysql` roles.
 
 ```yaml
 - hosts: db_servers
@@ -260,7 +260,7 @@ __Create a new playbook inside `static-assignments` folder and name it `db-serve
 ```
 ![](./images/db-playbook.png)
 
-__Now it is time to upload the changes into your GitHub:__
+### Now it is time to upload the changes into your GitHub:
 
 ```bash
 git add .
@@ -271,11 +271,11 @@ git push --set-upstream origin roles-feature
 ![](./images/git-add-commit.png)
 ![](./images/git-push.png)
 
-__Now, if you are satisfied with your codes, you can create a Pull Request.__
+### Now, if you are satisfied with your codes, you can create a Pull Request.
 
 ![](./images/pull-request.png)
 
-__Merge it to `main` branch on GitHub__
+### Merge it to `main` branch on GitHub
 ![](./images/git-merge.png)
 
 
@@ -302,7 +302,7 @@ ansible-galaxy role install geerlingguy.apache
 ```
 ![](./images/install-nginx-apache-role.png)
 
-__Rename the installed Nginx and Apache roles__
+### Rename the installed Nginx and Apache roles
 
 ```bash
 mv geerlingguy.nginx nginx
@@ -311,11 +311,11 @@ mv geerlingguy.apache apache
 ```
 ![](./images/rename-nginx-apache-role.png)
 
-__The folder structure now looks like this__
+### The folder structure now looks like this
 
 ![](./images/folder-structure.png)
 
-- __Update both static-assignment and site.yml files to refer the roles__
+- ### Update both static-assignment and site.yml files to refer the roles
 
 __Important Hints:__
 
@@ -359,7 +359,7 @@ load_balancer_is_required: false
 
 ![](./images/lb-yml.png)
 
-- Update `site.yml` files respectively
+- ### Update `site.yml` files respectively
 
 ```yaml
 ---
@@ -385,7 +385,7 @@ load_balancer_is_required: false
 
 Now you can make use of `env-vars\uat.yml` file to define which `loadbalancer` to use in UAT environment by setting respective environmental variable to `true`.
 
-You will activate load balancer, and enable `nginx` by setting these in the respective environment's `env-vars` file.
+You will activate `load balancer`, and enable `nginx` by setting these in the respective environment's `env-vars` file.
 
 ### Enable Nginx
 
@@ -470,7 +470,7 @@ This line renders the `/etc/nginx/sites-enabled/` to the `http` configuration of
 ![](./images/temp-nginx-confj2.png)
 
 
-#### Update `inventory/uat`
+### Update `inventory/uat`
 
 ```yaml
 [lb]
@@ -620,7 +620,7 @@ db ansible_host=172.31.2.161 ansible_ssh_user='ubuntu'
 ![](./images/update-webserver-role.png)
 
 
-__Update `roles/nginx/tasks/main.yml` to create a task that check and stop apache if it is running__
+### Update `roles/nginx/tasks/main.yml` with the code below to create a task that check and stop apache if it is running
 
 ```yaml
 ---
@@ -669,26 +669,26 @@ sudo vi /etc/nginx/nginx.conf
 ![](./images/nginx-vhost.png)
 
 
-Update the website's configuration to connect to the database (in /var/www/html/function.php file)
+### Update the website's configuration with the database and user credentials to connect to the database (in /var/www/html/function.php file)
 
 ```bash
 sudo vi /var/www/html/functions.php
 ```
 ![](./images/func-db-conn.png)
 
-Apply tooling-db.sql command on the webseveers
+### Apply tooling-db.sql command on the webservers
 
 ```bash
 sudo mysql -h 172.31.2.161 -u webaccess -p tooling < tooling-db.sql
 ```
 
-__Access the database server from Web Server__
+### Access the database server from Web Server
 
 ```bash
 sudo mysql -h 172.31.2.161 -u webaccess -p
 ```
 
-__Create in MyQSL a new admin user with username: myuser and password: password__
+### Create in MyQSL a new admin user with username: myuser and password: password
 
 ```SQL
 INSERT INTO users(id, username, password, email, user_type, status) VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
