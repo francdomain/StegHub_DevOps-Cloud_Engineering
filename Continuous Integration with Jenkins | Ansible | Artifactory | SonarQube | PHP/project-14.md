@@ -1924,6 +1924,8 @@ __Optional - Experience pentesting in pentest environment by configuring [Wiresh
 
 - __Update `static-assignments` directory to add `wireshark.yml` playbook__
 
+<!-- __install node on the jenkins server__ -->
+
 ![](./images/wireshark-playbook.png)
 
 - Push to GitHub and let your pipeline build and deploy the playbook tasks
