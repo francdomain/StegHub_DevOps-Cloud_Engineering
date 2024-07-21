@@ -595,7 +595,7 @@ variable "enable_classiclink_dns_support" {
       default = null
 }
 ```
-![](./images/variables.png)
+![](./images/var-tf.png)
 
 ## terraform.tfvars
 
