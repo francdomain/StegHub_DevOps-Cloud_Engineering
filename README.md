@@ -1,6 +1,6 @@
 # StegHub DevOps/ Cloud Engineering
 
-## DevOps & Cloud Engineering Journey
+## My DevOps & Cloud Engineering Journey at StegHub
 
 __This repository serves as a central hub for my learning journey in DevOps and Cloud Engineering at StegHub. It's a comprehensive collection of documentation, code samples, best practices, and curated resources that cover various aspects of these fields__.
 
