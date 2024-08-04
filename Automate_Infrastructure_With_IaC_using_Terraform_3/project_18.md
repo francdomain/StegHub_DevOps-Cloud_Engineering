@@ -182,6 +182,8 @@ For repetitive blocks of code you can use dynamic blocks in Terraform, to get to
 
 ![](./images/sg-var.png)
 
+The terraform code above is available in this [repository](https://github.com/francdomain/project_18_terraform_code)
+
 ## EC2 refactoring with `Map` and `Lookup`
 
 Remember, every piece of work you do, always try to make it dynamic to accommodate future changes. [Amazon Machine Image (AMI)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) is a regional service which means it is only available in the region it was created. But what if we change the region later, and want to dynamically pick up `AMI IDs` based on the available AMIs in that region? This is where we will introduce [Map](https://developer.hashicorp.com/terraform/language/functions/map) and [Lookup](https://developer.hashicorp.com/terraform/language/functions/lookup) functions.
