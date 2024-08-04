@@ -394,3 +394,5 @@ We will also see how to use terraform cloud for our backends.
 ### Conclusion
 
 We have been able to develop and refactor AWS Infrastructure as Code with Terraform.
+
+The repository for the terraform modules is available here: [project_18_terraform_modules](https://github.com/francdomain/project_18_terraform_modules)
