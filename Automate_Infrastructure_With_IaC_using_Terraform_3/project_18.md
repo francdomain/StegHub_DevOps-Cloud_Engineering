@@ -341,6 +341,8 @@ Complete the rest of the codes yourself, so, the resulted configuration structur
 ```
 ![](./images/modules-files.png)
 
+### Instantiating the Modules
+
 ![](./images/modules-call.png)
 
 ### Run `terraform plan`
