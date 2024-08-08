@@ -4,7 +4,7 @@
 
 This project demostrates how a secure infrastructure inside AWS VPC (Virtual Private Cloud) network is built for a particular company, who uses [WordPress CMS](https://wordpress.com/) for its main business website, and a [Tooling Website](https://github.com/francdomain/tooling) for their DevOps team. As part of the company’s desire for improved security and performance, a decision has been made to use a [reverse proxy technology from NGINX](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) to achieve this. The infrastructure will look like following diagram:
 
-![](./images/architecture.png)
+![image](./images/architecture.png)
 
 # Starting Off Your AWS Cloud Project
 
@@ -19,51 +19,51 @@ There are few requirements that must be met before you begin:
 
      Go to AWS console, and navigate to Services > All Services > Management & Governance > AWS Organizations
 
-   ![](./images/master-acct.png)
+   ![image](./images/master-acct.png)
 
    - Within the Root account, create a sub-account and name it `DevOps`. (You will need another email address to complete this)
 
       Navigate to Add an AWS accout > fill the name (DevOps)
 
-   ![](./images/sub-acct.png)
-   ![](./images/devops-acct.png)
+   ![image](./images/sub-acct.png)
+   ![image](./images/devops-acct.png)
 
    - Within the Root account, create an `AWS Organization Unit (OU)`. Name it `Dev`. (We will launch Dev resources in there)
 
       From the AWS Organization page, Click on root > Action > Create new
 
-   ![](./images/ou-dev.png)
+   ![image](./images/ou-dev.png)
 
    - Move the `DevOps` account into the `Dev OU`.
 
       Slecte the account to move, then Click Action > Move, then select the OU to move the account to and click move AWS account.
 
-   ![](./images/move-acct.png)
-   ![](./images/dev-acct.png)
+   ![image](./images/move-acct.png)
+   ![image](./images/dev-acct.png)
 
    - Login to the newly created AWS account using the new email address.
 
-   ![](./images/aws-login.png)
+   ![image](./images/aws-login.png)
 
 2. Create a free domain name for your fictitious company at Freenom domain registrar here. We use [cloudns](https://www.cloudns.net) instead.
 
-![](./images/dns.png)
+![image](./images/dns.png)
 
 3. Create a hosted zone in AWS, and map it to your free domain from Freenom. Watch how to do that here
 
    - Go to `route53` and select `create hosted zone`
 
-![](./images/route53.png)
-![](./images/create-hosted-zone.png)
+![image](./images/route53.png)
+![image](./images/create-hosted-zone.png)
 
-![](./images/hosted-zone.png)
-![](./images/HZ.png)
+![image](./images/hosted-zone.png)
+![image](./images/HZ.png)
 
 - Let's map the hosted zone to our free domain
 
 Copy the name server (NS) values from AWS, then go to your free domain, edit the default `NS` values and update them with the values from AWS.
 
-![](./images/update-ns.png)
+![image](./images/update-ns.png)
 
 
 # Set Up a Virtual Private Network (VPC)
@@ -78,114 +78,114 @@ Always make reference to the architectural diagram and ensure that your configur
 
 Actions > Edit VPC Settings > Enable DNS hostnames
 
-![](./images/enable-dns-hostname.png)
+![image](./images/enable-dns-hostname.png)
 
 ### 2. Create subnets as shown in the architecture
 
 Create public and private subnets in each availablity zones respectively. Thus, we create public subnet in availability zone A and B respectively. We create 4 private subnets with respect to the diagram we are working with as such we create 2 private subnets each in availability zone A and B.
 
-![](./images/subnet1.png)
-![](./images/subnet2.png)
-![](./images/subnet3.png)
-![](./images/subnet4.png)
-![](./images/subnet5.png)
-![](./images/subnet6.png)
+![image](./images/subnet1.png)
+![image](./images/subnet2.png)
+![image](./images/subnet3.png)
+![image](./images/subnet4.png)
+![image](./images/subnet5.png)
+![image](./images/subnet6.png)
 
 Enable Auto-assign public IPv4 address in the public subnets.
 Actions > Edit subnet settings > Enable auto-assign public IPv4
 
-![](./images/en-auto-assign-pubIP.png)
+![image](./images/en-auto-assign-pubIP.png)
 
 All Subnets
 
-![](./images/all-subnets.png)
+![image](./images/all-subnets.png)
 
 ### 3. Create a route table and associate it with public subnets
 Create a public route table for the public subnets
 
-![](./images/create-pub-rt.png)
+![image](./images/create-pub-rt.png)
 
 Associate it with public subnets.
 Click on the route table > Subnet Association > Edit Subnet Association.
 
-![](./images/ass-pub-rt-subnets.png)
+![image](./images/ass-pub-rt-subnets.png)
 
 The public route table and it's associated public subnets
 
-![](./images/pub-rt.png)
+![image](./images/pub-rt.png)
 
 ### 4. Create a route table and associate it with private subnets
 Create a private route table for the private subnets
 
-![](./images/create-private-rt.png)
+![image](./images/create-private-rt.png)
 
 Associate it with private subnets
 
-![](./images/ass-privt-rt-subnets.png)
+![image](./images/ass-privt-rt-subnets.png)
 
 The route tables
 
-![](./images/rout-tables.png)
+![image](./images/rout-tables.png)
 
 ### 5. Create an [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)
 
-![](./images/create-igw.png)
+![image](./images/create-igw.png)
 
 Attach it to the created VPC.
 
-![](./images/attach-igw.png)
-![](./images/igw-attached.png)
+![image](./images/attach-igw.png)
+![image](./images/igw-attached.png)
 
 ### 6. Edit a route in public route table, and associate it with the Internet Gateway. (This is what allows a public subnet to be accisble from the Internet)
 
 In the public route table, Click route tab > Edit route > Add route
 since we are routing traffic to the internet, the destination will be `0.0.0.0/0`
 
-![](./images/route-pub-rt.png )
+![image](./images/route-pub-rt.png )
 
-![](./images/pub-route.png)
+![image](./images/pub-route.png)
 
 ### 7. Create 3 [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 
-![](./images/create-eip.png)
+![image](./images/create-eip.png)
 
 ### 8. Create a [Nat Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) and assign one of the Elastic IPs (*The other 2 will be used by [Bastion hosts](https://aws.amazon.com/solutions/implementations/linux-bastion/))
 
-![](./images/create-NAT.png)
+![image](./images/create-NAT.png)
 
 - Edit a route in private route table, and associate it with the Nat Gateway.
 
-  ![](./images/route-Nat.png)
+  ![image](./images/route-Nat.png)
 
 ### 9. Create a [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html#CreatingSecurityGroups) for:
 
 - __External [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/application-load-balancer/):__ External `ALB` will be available from the Internet
 
-![](./images/ext-ALB-SG.png)
+![image](./images/ext-ALB-SG.png)
 
 - __Bastion Servers:__ Access to the Bastion servers should be allowed only from workstations that need to SSH into the bastion servers. Hence, you can use your workstation public IP address. To get this information, simply go to your terminal and type `curl www.canhazip.com`
 
-![](./images/bastion-sg.png)
+![image](./images/bastion-sg.png)
 
 - __Nginx Servers:__ Access to Nginx should only be allowed from an external Application Load balancer (ALB).
 
-![](./images/nginx-sg.png)
+![image](./images/nginx-sg.png)
 
 - __Internal Application Load Balancer:__ This is `not` an internet facing `ALB` rather used to distribute internal traffic comming from Nginx (reverse proxy) to our Webservers Auto Scalling Groups in our private subnets. It also helps us to prevent single point of failure.
 
-![](./images/int-ALB-SG.png)
+![image](./images/int-ALB-SG.png)
 
 - __Webservers:__ Access to Webservers should only be allowed from the internal ALB.
 
-![](./images/webservers-sg.png)
+![image](./images/webservers-sg.png)
 
 - __Data Layer:__ Access to the Data layer, which is comprised of [Amazon Relational Database Service (`RDS`)](https://aws.amazon.com/rds/) and [Amazon Elastic File System (EFS)](https://aws.amazon.com/efs/) must be carefully desinged - only webservers should be able to connect to `RDS`, while Nginx and Webservers will have access to `EFS Mountpoint`.
 
-![](./images/data-sg.png)
+![image](./images/data-sg.png)
 
 All Security Groups
 
-![](./images/SGs.png)
+![image](./images/SGs.png)
 
 
 # TLS Certificates From Amazon Certificate Manager (ACM)
@@ -197,28 +197,28 @@ We will need TLS certificates to handle secured connectivity to our Application 
 3. Use DNS to validate the domain name
 4. Tag the resource
 
-![](./images/ACM.png)
+![image](./images/ACM.png)
 
-![](./images/cert-created.png)
+![image](./images/cert-created.png)
 
 - Ensure to create record on Route 53 after creating the certificate. This will generate a CNAME record type in Route 53. We will attach this certificate to all the load balancers.
 
   - Click, Create records in Route 53 > Create records
 
-    ![](./images/create-record-cname.png)
+    ![image](./images/create-record-cname.png)
 
-    ![](./images/cname-created.png)
+    ![image](./images/cname-created.png)
 
     Copy the CNAME name and the CNAME value generated then
     Go to Cloudns, Click on CNAME > Add new record. Paste the CNAME name and value to validate the record for AWS to issue the certificate (The Certificate status remain pending unitl the record is validated by the Domain provider.)
 
-    ![](./images/validate-records.png)
+    ![image](./images/validate-records.png)
 
-    ![](./images/cloudns-records.png)
+    ![image](./images/cloudns-records.png)
 
     After validating the record, AWS will issue the Certificate and the status changes to issued.
 
-    ![](./images/issued-cert.png)
+    ![image](./images/issued-cert.png)
 
 
 # Setup EFS
@@ -232,10 +232,10 @@ __NB:__ Any subnet we specify our mount target, the Amazon EFS becomes available
 
 3. Associate the Security groups created earlier for data layer.
 
-![](./images/create-FS.png)
-![](./images/create-FS-cont.png)
+![image](./images/create-FS.png)
+![image](./images/create-FS-cont.png)
 
-![](./images/efs.png)
+![image](./images/efs.png)
 
 4. Create an EFS access point.
 
@@ -243,27 +243,27 @@ This will specify where the webservers will mount with, thus creating 2 mount po
 
 Access point for wordpress server
 
-![](./images/wp-access-point.png)
+![image](./images/wp-access-point.png)
 
 Access point for tooling server
 
-![](./images/tooling-access-pt.png)
+![image](./images/tooling-access-pt.png)
 
 EFS access points
 
-![](./images/efs-access-points.png)
-![](./images/EFS-access-pt.png)
+![image](./images/efs-access-points.png)
+![image](./images/EFS-access-pt.png)
 
 # Setup RDS
 
 ### Pre-requisite:
 Create a `KMS` key from Key Management Service (KMS) to be used to encrypt the database instance.
 
-![](./images/kms.png)
-![](./images/kms-label.png)
-![](./images/kms-admin-permit.png)
-![](./images/kms-usage-permit.png)
-![](./images/kms-created.png)
+![image](./images/kms.png)
+![image](./images/kms-label.png)
+![image](./images/kms-admin-permit.png)
+![image](./images/kms-usage-permit.png)
+![image](./images/kms-created.png)
 
 Amazon Relational Database Service (Amazon RDS) is a managed distributed relational database service by Amazon Web Services. This web service running in the cloud designed to simplify setup, operations, maintenans & scaling of relational databases. Without RDS, Database Administrators (DBA) have more work to do, due to RDS, some DBAs have become jobless.
 To ensure that yout databases are highly available and also have failover support in case one availability zone fails, we will configure a [multi-AZ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) set up of [RDS MySQL database](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html) instance. In our case, since we are only using 2 AZs, we can only failover to one, but the same concept applies to 3 Availability Zones. We will not consider possible failure of the whole Region, but for this AWS also has a solution - this is a more advanced concept that will be discussed in following projects.
@@ -271,33 +271,33 @@ To ensure that yout databases are highly available and also have failover suppor
 To configure `RDS`, follow steps below:
 1. Create a `subnet group` and add 2 private subnets (data Layer)
 
-![](./images/rds-subnet-grp.png)
-![](./images/rds-subnet-grp-created.png)
+![image](./images/rds-subnet-grp.png)
+![image](./images/rds-subnet-grp-created.png)
 
 2. Create an RDS Instance for `mysql 8.*.*`
 
-![](./images/mysql.png)
+![image](./images/mysql.png)
 
 3. To satisfy our architectural diagram, you will need to select either `Dev/Test` or `Production` Sample Template. But to minimize AWS cost, you can select the `Do not create a standby instance` option under `Availability & durability` sample template (The production template will enable Multi-AZ deployment)
 
-![](./images/rds-template.png)
+![image](./images/rds-template.png)
 
 4. Configure other settings accordingly (For test purposes, most of the default settings are good to go). In the real world, you will need to size the database appropriately. You will need to get some information about the usage. If it is a highly transactional database that grows at 10GB weekly, you must bear that in mind while configuring the initial storage allocation, storage autoscaling, and maximum storage threshold.
 
-![](./images/rds-settings-cont.png)
+![image](./images/rds-settings-cont.png)
 
 5. Configure VPC and security (ensure the database is not available from the Internet)
 
-![](./images/rds-vpc.png)
-![](./images/rds-vpc-cont.png)
+![image](./images/rds-vpc.png)
+![image](./images/rds-vpc-cont.png)
 
 6. Configure backups and retention
 7. Encrypt the database using the KMS key created earlier
 8. Enable [CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-cloudwatch.html) monitoring and export Error and Slow Query logs (for production, also include Audit)
 
-![](./images/rds-backup.png)
+![image](./images/rds-backup.png)
 
-![](./images/rds.png)
+![image](./images/rds.png)
 
 
 # Proceed With Compute Resources
@@ -340,31 +340,31 @@ __For Nginx__
 ```bash
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
-![](./images/epel-release.png)
+![image](./images/epel-release.png)
 
 ```bash
 sudo yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm
 ```
-![](./images/dnf-utils.png)
+![image](./images/dnf-utils.png)
 
 ```bash
 sudo yum install wget vim python3 telnet htop net-tools ntp -y
 ```
-![](./images/err-ntp.png)
+![image](./images/err-ntp.png)
 
 The error occured because the ntp package is not available in the repositories for our Enterprise Linux 9 system. Instead of ntp, chrony can be used, which is the default NTP implementation in newer versions of RHEL and its derivatives, including Enterprise Linux 9.
 
 ```bash
 sudo yum install wget vim python3 telnet htop git mysql net-tools chrony -y
 ```
-![](./images/install-software-nginx.png)
+![image](./images/install-software-nginx.png)
 
 ```bash
 sudo systemctl start chronyd
 sudo systemctl enable chronyd
 sudo systemctl status chronyd
 ```
-![](./images/start-chrony.png)
+![image](./images/start-chrony.png)
 
 __NB__: __Repeat the above steps for Bastion and Webservers__
 
@@ -379,7 +379,7 @@ sudo setsebool -P httpd_can_network_connect_db=1
 sudo setsebool -P httpd_execmem=1
 sudo setsebool -P httpd_use_nfs 1
 ```
-![](./images/selinux-policy.png)
+![image](./images/selinux-policy.png)
 
 __NB: Repeat the step above for Webservers__
 
@@ -393,40 +393,40 @@ git clone https://github.com/aws/efs-utils
 
 cd efs-utils
 ```
-![](./images/clone-efs-utils.png)
+![image](./images/clone-efs-utils.png)
 
 ```bash
 sudo yum install -y make
 ```
-![](./images/install-make.png)
+![image](./images/install-make.png)
 
 ```bash
 sudo yum install -y rpm-build
 ```
-![](./images/install-rpm-build.png)
+![image](./images/install-rpm-build.png)
 
 ```bash
 # openssl-devel is needed by amazon-efs-utils-2.0.4-1.el9.x86_64
 sudo yum install openssl-devel -y
 ```
-![](./images/install-openssl-devel.png)
+![image](./images/install-openssl-devel.png)
 
 
 ```bash
 # Cargo command needs to be installed as it is necessary for building the Rust project included in the source.
 sudo yum install cargo -y
 ```
-![](./images/install-cargo.png)
+![image](./images/install-cargo.png)
 
 ```bash
 sudo make rpm
 ```
-![](./images/make-rpm.png)
+![image](./images/make-rpm.png)
 
 ```bash
 sudo yum install -y  ./build/amazon-efs-utils*rpm
 ```
-![](./images/install-efs-utils.png)
+![image](./images/install-efs-utils.png)
 
 __Repeat the steps above for Webservers__
 
@@ -451,30 +451,30 @@ sudo chmod 700 /etc/ssl/private
 
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/fnc.key -out /etc/ssl/certs/fnc.crt
 ```
-![](./images/nginx-ssl-key.png)
+![image](./images/nginx-ssl-key.png)
 
 ```bash
 sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 ```
-![](./images/nginx-ssl-cert.png)
+![image](./images/nginx-ssl-cert.png)
 
 ## Set up self-signed certificate for the Apache Webserver instance
 
 ```bash
 sudo yum install -y mod_ssl
 ```
-![](./images/install-mod-ssl.png)
+![image](./images/install-mod-ssl.png)
 
 ```bash
 sudo openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/fnc.key -x509 -days 365 -out /etc/pki/tls/certs/fnc.crt
 ```
-![](./images/apache-tls-key.png)
+![image](./images/apache-tls-key.png)
 
 ```bash
 # Edit the ssl.conf to conform with the key and crt file created.
 sudo vim /etc/httpd/conf.d/ssl.conf
 ```
-![](./images/edit-apache-config.png)
+![image](./images/edit-apache-config.png)
 
 
 ## [Create an AMI](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instances
@@ -483,19 +483,19 @@ On the EC2 instance page, Go to Actions > Image and templates > Create image
 
 __For Bastion AMI__
 
-![](./images/bastion-ami.png)
+![image](./images/bastion-ami.png)
 
 __For Nginx AMI__
 
-![](./images/nginx-ami.png)
+![image](./images/nginx-ami.png)
 
 __For Webservers AMI__
 
-![](./images/webservers-ami.png)
+![image](./images/webservers-ami.png)
 
 __All AMIs__
 
-![](./images/all-ami.png)
+![image](./images/all-ami.png)
 
 
 ## CONFIGURE TARGET GROUPS
@@ -504,18 +504,18 @@ Create Target groups for Nginx, Worpress and Tooling
 
 __For Nginx Target Group__
 
-![](./images/nginx-tg.png)
-![](./images/nginx-tg-cont.png)
+![image](./images/nginx-tg.png)
+![image](./images/nginx-tg-cont.png)
 
 __For Wordpress Target Group__
 
-![](./images/wordpress-tg.png)
-![](./images/wordpress-tg-cont.png)
+![image](./images/wordpress-tg.png)
+![image](./images/wordpress-tg-cont.png)
 
 __For Tooling Target Group__
 
-![](./images/tooling-tg.png)
-![](./images/tooling-tg-cont.png)
+![image](./images/tooling-tg.png)
+![image](./images/tooling-tg-cont.png)
 
 
 # Configure Application Load Balancer (ALB)
@@ -531,11 +531,11 @@ Nginx EC2 Instances will have configurations that accepts incoming traffic only 
 5. Select Security Group
 6. Select Nginx Instances as the target group
 
-![](./images/ext-alb.png)
-![](./images/ext-alb-cont.png)
-![](./images/ext-alb-cont1.png)
+![image](./images/ext-alb.png)
+![image](./images/ext-alb-cont.png)
+![image](./images/ext-alb-cont1.png)
 
-![](./images/ext-alb-created.png)
+![image](./images/ext-alb-created.png)
 
 
 ### Application Load Balancer To Route Traffic To Webservers
@@ -554,11 +554,11 @@ To solve this problem, we must use a load balancer. But this time, it will be an
 
 __NOTE:__ This process must be repeated for both WordPress and Tooling websites.
 
-![](./images/int-alb.png)
-![](./images/int-alb-cont.png)
-![](./images/int-alb-cont1.png)
+![image](./images/int-alb.png)
+![image](./images/int-alb-cont.png)
+![image](./images/int-alb-cont1.png)
 
-![](./images/./all-alb.png)
+![image](./images/./all-alb.png)
 
 The default target configured on the listener while creating the internal load balancer is to forward traffic to wordpress on port 443. Hence, we need to create a rule to route traffic to tooling as well.
 
@@ -575,13 +575,13 @@ The default target configured on the listener while creating the internal load b
 	-	Enter the `hostnames` for which you want to route traffic. (tooling.com and www.tooling.com).
 	-	Choose the appropriate target group for the `hostname`.
 
-![](./images/linstener-tag.png)
-![](./images/add-condition.png)
-![](./images/define-rule.png)
-![](./images/forward-to.png)
-![](./images/listener-traffic-rule.png)
+![image](./images/linstener-tag.png)
+![image](./images/add-condition.png)
+![image](./images/define-rule.png)
+![image](./images/forward-to.png)
+![image](./images/listener-traffic-rule.png)
 
-![](./images/listener-rules.png)
+![image](./images/listener-rules.png)
 
 
 ## PREPARE LAUNCH TEMPLATE FOR NGINX (ONE PER SUBNET)
@@ -592,19 +592,19 @@ The default target configured on the listener while creating the internal load b
 4. Configure [Userdata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) to update yum package repository and install nginx.
 Ensure to `enable auto-assign public IP` in the Advance Network Configuration
 
-![](./images/craete-nginx-lt.png)
-![](./images/nginx-lt-cont.png)
-![](./images/nginx-lt-1.png)
-![](./images/nginx-lt-userdata.png)
+![image](./images/craete-nginx-lt.png)
+![image](./images/nginx-lt-cont.png)
+![image](./images/nginx-lt-1.png)
+![image](./images/nginx-lt-userdata.png)
 
 We need to update the reverse.conf file by updating proxy_pass value to the end point of the internal load balancer (DNS name) before using the userdata so as to clone the updated repository.
 
-![](./images/reverse-conf.png)
+![image](./images/reverse-conf.png)
 
 
 __Repeat the same setting for Bastion, the difference here is the userdata input, AMI and security group__.
 
-![](./images/bastion-userdata.png)
+![image](./images/bastion-userdata.png)
 
 ### Wordpress Userdata
 
@@ -614,13 +614,13 @@ Update the mount point to the file system, this should be done on access points 
 
 `sudo mount -t efs -o tls,accesspoint=fsap-0941d279e4caf2238 fs-01bb3fe22fdd61691:/ /var/www/`
 
-![](./images/mount-p-for-userdata.png)
+![image](./images/mount-p-for-userdata.png)
 
-![](./images/attche-mp.png)
+![image](./images/attche-mp.png)
 
 The RDS end point is also needed
 
-![](./images/db-end-point.png)
+![image](./images/db-end-point.png)
 
 Paste the rds end-point in the wordpress userdata and tooling userdata
 
@@ -662,7 +662,7 @@ chcon -t httpd_sys_rw_content_t /var/www/html/ -R
 
 systemctl restart httpd
 ```
-![](./images/wp-userdata.png)
+![image](./images/wp-userdata.png)
 
 ### Tooling userdata
 
@@ -703,12 +703,12 @@ mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
 
 systemctl restart httpd
 ```
-![](./images/tooling-userdata.png)
+![image](./images/tooling-userdata.png)
 
 
 __All launch templates created__.
 
-![](./images/all-templates.png)
+![image](./images/all-templates.png)
 
 
 ## CONFIGURE AUTOSCALING FOR NGINX
@@ -727,34 +727,34 @@ __All launch templates created__.
 
 ### Create Auto Scaling Group for Bation
 
-![](./images/bastion-AGS.png)
-![](./images/bastion-ASG1.png)
+![image](./images/bastion-AGS.png)
+![image](./images/bastion-ASG1.png)
 
 __Access RDS through Bastion connection to craete database for wordpress and tooling.__
 
  Copy the RDS endpoint to be used as host
 
-![](./images/db-end-point.png)
+![image](./images/db-end-point.png)
 
-![](./images/ssh-agent.png)
+![image](./images/ssh-agent.png)
 
-![](./images/db.png)
+![image](./images/db.png)
 
 ### Create Auto Scaling Group for Nginx
 
-![](./images/nginx-ASG.png)
-![](./images/nginx-ASG1.png)
-![](./images/nginx-ASG-adv.png)
-![](./images/nginx-config-grp-size.png)
-![](./images/nginx-ASG-l.png)
-![](./images/nginx-asg-sns.png)
+![image](./images/nginx-ASG.png)
+![image](./images/nginx-ASG1.png)
+![image](./images/nginx-ASG-adv.png)
+![image](./images/nginx-config-grp-size.png)
+![image](./images/nginx-ASG-l.png)
+![image](./images/nginx-asg-sns.png)
 
 
 ### Repeat the Nginx Auto Scaling Group steps above for Wordpress and Tooling with their right launch template
 
 All Auto Scaling Groups
 
-![](./images/ASGs.png)
+![image](./images/ASGs.png)
 
 
 # Configuring DNS with Route53
@@ -770,50 +770,50 @@ NOTE: You can use either CNAME or alias records to achieve the same thing. But a
 - Create an alias record for the root domain and direct its traffic to the ALB DNS name.
 - Create an alias record for `tooling.fncloud.dns-dynamic.net` and direct its traffic to the ALB DNS name.
 
-![](./images/record1.png)
-![](./images/record2.png)
+![image](./images/record1.png)
+![image](./images/record2.png)
 
-![](./images/route53-records.png)
+![image](./images/route53-records.png)
 
 
 ### Ensure that health check passes for the target groups
 
 __Nginx Target Group Health Check__
 
-![](./images/nginx-health-check.png)
+![image](./images/nginx-health-check.png)
 
 __Wordpress Target Group Health Check__
 
-![](./images/wp-health-check.png)
+![image](./images/wp-health-check.png)
 
 __Tooling Target Group Health Check__
 
-![](./images/tooling-health-check.png)
+![image](./images/tooling-health-check.png)
 
 All instances
 
-![](./images/ASG-instances.png)
+![image](./images/ASG-instances.png)
 
 __Access the tooling webserver using Bastion  to Confirm the userdata configuration for database connection in functions.php file__.
 
-![](./images/db-conn-php-file.png)
+![image](./images/db-conn-php-file.png)
 
 __Now let us access our tooling website via a browser using our DNS name__
 
-![](./images/tooling-website.png)
+![image](./images/tooling-website.png)
 
-![](./images/tooling-website-secure.png)
+![image](./images/tooling-website-secure.png)
 
 
 __Let's access our wordpress website__
 
-![](./images/wp-login-config.png)
+![image](./images/wp-login-config.png)
 
-![](./images/wp-login.png)
+![image](./images/wp-login.png)
 
-![](./images/wp-wesite.png)
+![image](./images/wp-wesite.png)
 
-![](./images/wp-website-secure.png)
+![image](./images/wp-website-secure.png)
 
 
 
