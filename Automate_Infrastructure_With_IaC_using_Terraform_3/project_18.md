@@ -80,11 +80,11 @@ resource "aws_dynamodb_table" "terraform_locks" {
 
 Terraform expects that both S3 bucket and DynamoDB resources are already created before we configure the backend. So, let us run `terraform apply` to provision resources.
 
-![](./images/s3-apply.png)
+![image](./images/s3-apply.png)
 
-![](./images/s3-bucket.png)
+![image](./images/s3-bucket.png)
 
-![](./images/dynamo-db.png)
+![image](./images/dynamo-db.png)
 
 ### 3. Configure S3 Backend
 
@@ -109,19 +109,19 @@ Before doing anything if you opened AWS now to see what happened you should be a
 
 - `.tfstatefile` is now inside the S3 bucket
 
-  ![](./images/s3-tfstate.png)
+  ![image](./images/s3-tfstate.png)
 
 - DynamoDB table which we create has an entry which includes state file status
 
-  ![](./images/table-entry.png)
+  ![image](./images/table-entry.png)
 
 - Navigate to the DynamoDB table inside AWS and leave the page open in your browser. Run `terraform plan` and while that is running, refresh the browser and see how the lock is being handled:
 
-  ![](./images/table-entry-run.png)
+  ![image](./images/table-entry-run.png)
 
 After `terraform plan` completes, refresh DynamoDB table.
 
-![](./images/table-after-run.png)
+![image](./images/table-after-run.png)
 
 ### 5. Add Terraform Output
 
@@ -146,14 +146,14 @@ Now we have everything ready to go!
 
 Terraform will automatically read the latest state from the S3 bucket to determine the current state of the infrastructure. Even if another engineer has applied changes, the state file will always be up to date.
 
-![]()
+![image]()
 
 Now, let's head over to the S3 console again, refresh the page, and click the grey “Show” button next to “Versions.” We should now see several versions of our terraform.tfstate file in the S3 bucket:
 
-![](./images/tf-apply-v1.png)
-![](./images/tf-apply-v1-cont.png)
+![image](./images/tf-apply-v1.png)
+![image](./images/tf-apply-v1-cont.png)
 
-![](./images/state-version.png)
+![image](./images/state-version.png)
 
 With help of remote backend and locking configuration that we have just configured, collaboration is no longer a problem.
 
@@ -176,11 +176,11 @@ For repetitive blocks of code you can use dynamic blocks in Terraform, to get to
 
 ### Refactor Security Groups creation with `dynamic blocks`.
 
-![](./images/dynamic-blk.png)
+![image](./images/dynamic-blk.png)
 
-![](./images/sg-rules.png)
+![image](./images/sg-rules.png)
 
-![](./images/sg-var.png)
+![image](./images/sg-var.png)
 
 The terraform code above is available in this [repository](https://github.com/francdomain/project_18_terraform_code)
 
@@ -278,7 +278,7 @@ Break down your Terraform codes to have all resources in their respective module
   - VPC
   - security
 ```
-![](./images/modules-folders.png)
+![image](./images/modules-folders.png)
 
 Each module shall contain following files:
 
@@ -341,42 +341,42 @@ Complete the rest of the codes yourself, so, the resulted configuration structur
     ├── terraform.tfvars
     └── variables.tf
 ```
-![](./images/modules-files.png)
+![image](./images/modules-files.png)
 
 ### Instantiating the Modules
 
-![](./images/modules-call.png)
+![image](./images/modules-call.png)
 
 ### Run `terraform plan`
 
-![](./images/tf-plan-module.png)
+![image](./images/tf-plan-module.png)
 
 ### Run `terraform apply`
 
-![](./images/tf-apply.png)
-![](./images/tf-apply2.png)
-![](./images/tf-apply3.png)
-![](./images/tf-apply4.png)
-![](./images/tf-apply5.png)
+![image](./images/tf-apply.png)
+![image](./images/tf-apply2.png)
+![image](./images/tf-apply3.png)
+![image](./images/tf-apply4.png)
+![image](./images/tf-apply5.png)
 
-![](./images/SGs.png)
+![image](./images/SGs.png)
 
-![](./images/rds.png)
+![image](./images/rds.png)
 
-![](./images/subnets.png)
+![image](./images/subnets.png)
 
-![](./images/TGs.png)
+![image](./images/TGs.png)
 
-![](./images/LBs.png)
+![image](./images/LBs.png)
 
-![](./images/efs.png)
+![image](./images/efs.png)
 
-![](./images/ec2.png)
+![image](./images/ec2.png)
 
 
 ### Run `terraform state list`
 
-![](./images/tf-state-list.png)
+![image](./images/tf-state-list.png)
 
 
 Now, the code is much more well-structured and can be easily read, edited and reused by our DevOps team members.
