@@ -46,7 +46,7 @@ This repository is designed to be informative for both experienced professionals
 
 - __Project 18: [Automate Infrastructure With IaC using Terraform 3 (Refactoring)](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/blob/main/Automate_Infrastructure_With_IaC_using_Terraform_3/project_18.md)__
 
-- __Project 19: Automate Infrastructure With IaC using Terraform 4 (Terraform Cloud)__
+- __Project 19: [Automate Infrastructure With IaC using Terraform 4 (Terraform Cloud)](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/blob/main/Automate_Infrastructure_With_IaC_using_Terraform_4/project_19.md)__
 
 - __Project 20: Migration to the Сloud with containerization (Docker & Docker Compose) 1__
 
