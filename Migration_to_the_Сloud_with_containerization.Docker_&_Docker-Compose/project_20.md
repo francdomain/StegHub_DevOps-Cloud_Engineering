@@ -568,6 +568,9 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
+
+sudo systemctl start docker
+sudo systemctl enable docker
 ```
 - Install the Docker packages.
   To install the latest version, run:
@@ -785,9 +788,6 @@ __Install `docker compose` on jenkins server__
 
 ```bash
 sudo apt update
-# Start docker if not already started
-sudo systemctl start docker
-sudo systemctl enable docker
 
 LATEST_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
 
