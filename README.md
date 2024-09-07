@@ -48,9 +48,9 @@ This repository is designed to be informative for both experienced professionals
 
 - __Project 19: [Automate Infrastructure With IaC using Terraform 4 (Terraform Cloud)](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/blob/main/Automate_Infrastructure_With_IaC_using_Terraform_4/project_19.md)__
 
-- __Project 20: Migration to the Сloud with containerization (Docker & Docker Compose) 1__
+- __Project 20: [Migration to the Сloud with containerization (Docker & Docker Compose) 1](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/blob/main/Migration_to_the_%D0%A1loud_with_containerization.Docker_%26_Docker-Compose/project_20.md)__
 
-- __Project 21: Orchestrating containers across multiple Virtual Servers with Kubernetes 1__
+- __Project 21: [Orchestrating containers across multiple Virtual Servers with Kubernetes 1](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/blob/main/Orchestrating_containers_across_multiple_Virtual_Servers_with_Kubernetes/project_21.md)__
 
 - __Project 22: Deploying Applications Into Kubernetes Cluster__
 
