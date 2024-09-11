@@ -52,7 +52,7 @@ This repository is designed to be informative for both experienced professionals
 
 - __Project 21: [Orchestrating containers across multiple Virtual Servers with Kubernetes 1](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/blob/main/Orchestrating_containers_across_multiple_Virtual_Servers_with_Kubernetes/project_21.md)__
 
-- __Project 22: Deploying Applications Into Kubernetes Cluster__
+- __Project 22: [Deploying Applications Into Kubernetes Cluster](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/tree/main/Deploying_Applications_Into_Kubernetes_Cluster)__
 
 - __Project 23: Persisting Data in Kubernetes__
 
