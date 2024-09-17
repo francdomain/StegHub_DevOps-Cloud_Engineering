@@ -88,8 +88,6 @@ jenkins-0   2/2     Running   0          6m14s
 ```
 ![](./images/get-pod-err.png)
 
-The output shows that ..............
-
 ```bash
 kubectl describe pods -- kubeconfig
 ```
