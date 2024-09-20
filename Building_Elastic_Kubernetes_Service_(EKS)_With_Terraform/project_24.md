@@ -461,3 +461,5 @@ aws eks update-kubeconfig --name tooling-app-eks --region us-west-1 --kubeconfig
 ```
 ![](./images/create-kubeconfig.png)
 
+
+[Here's the link to the terraform code](https://github.com/francdomain/EKS_Cluster_With_Terraform)
