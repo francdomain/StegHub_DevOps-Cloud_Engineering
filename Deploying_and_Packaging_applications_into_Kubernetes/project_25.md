@@ -521,6 +521,8 @@ Within the hosted zone is where all the necessary DNS records will be created. S
 
 For detailed read on selecting between CNAME and Alias based records, read the [official documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html)
 
+![](./images/r53.png)
+
 ## Visiting the application from the browser
 
 So far, we now have an application running in Kubernetes that is also accessible externally. That means if you navigate to https://tooling.artifactory.sandbox.svc.darey.io/ (_replace the full URL with your domain_), it should load up the artifactory application.
