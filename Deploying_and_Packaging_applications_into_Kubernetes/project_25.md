@@ -496,8 +496,6 @@ If anyone were to visit the tool, it would be very inconvenient sharing the long
 
 The `sandbox.svc.darey.io` part of the domain is the configured HOSTED ZONE in AWS. So you will need to configure __Hosted Zone__ in AWS console or as part of your infrastructure as code using terraform.
 
-![](./images/create-hz.png)
-
 If you purchased the domain directly from AWS, the hosted zone will be automatically configured for you. But if your domain is registered with a different provider such as __freenon__, __Cloudns__ or __namechaep__, you will have to create the hosted zone and update the name servers.
 
 ## Create Route53 record
