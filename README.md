@@ -56,9 +56,9 @@ This repository is designed to be informative for both experienced professionals
 
 - __Project 23: [Persisting Data in Kubernetes](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/blob/main/Persisting_Data_in_Kubernetes/project_23.md)__
 
-- __Project 24: Building Elastic Kubernetes Service (EKS) With Terraform__
+- __Project 24: [Building Elastic Kubernetes Service (EKS) With Terraform](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/tree/main/Building_Elastic_Kubernetes_Service_(EKS)_With_Terraform)__
 
-- __Project 25: Deploying and Packaging applications into Kubernetes__
+- __Project 25: [Deploying and Packaging applications into Kubernetes](https://github.com/francdomain/StegHub_DevOps-Cloud_Engineering/blob/main/Deploying_and_Packaging_applications_into_Kubernetes/project_25.md)__
 
 
 <br>
