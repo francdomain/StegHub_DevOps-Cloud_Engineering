@@ -364,6 +364,21 @@ This command is idempotent:
 - __Self Challenge Task__ – Delete the installation after running above command. Then try to re-install it using a slightly different method you are already familiar with. Ensure NOT to use the flag `--repo`
 - __Hint__ – Run the `helm repo add command` before installation
 
+After deleting the installation,
+Add the helm repo
+
+```bash
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+```
+
+Install Nginx Ingress Controller in the ingress-nginx namespace
+
+```bash
+helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace
+```
+
+
 2. A few pods should start in the ingress-nginx namespace:
 
 ```bash
@@ -492,9 +507,9 @@ Now, take note of
 
 ## Configure DNS
 
-If anyone were to visit the tool, it would be very inconvenient sharing the long load balancer address. Ideally, you would create a DNS record that is human readable and can direct request to the balancer. This is exactly what has been configured in the ingress object - `host: "tooling.artifactory.sandbox.svc.darey.io"` but without a DNS record, there is no way that host address can reach the load balancer.
+If anyone were to visit the tool, it would be very inconvenient sharing the long load balancer address. Ideally, you would create a DNS record that is human readable and can direct request to the balancer. This is exactly what has been configured in the ingress object - `host: "tooling.artifactory.steghub.com"` but without a DNS record, there is no way that host address can reach the load balancer.
 
-The `sandbox.svc.darey.io` part of the domain is the configured HOSTED ZONE in AWS. So you will need to configure __Hosted Zone__ in AWS console or as part of your infrastructure as code using terraform.
+The `sandbox.svc.steghub.com` part of the domain is the configured HOSTED ZONE in AWS. So you will need to configure __Hosted Zone__ in AWS console or as part of your infrastructure as code using terraform.
 
 If you purchased the domain directly from AWS, the hosted zone will be automatically configured for you. But if your domain is registered with a different provider such as __freenon__, __Cloudns__ or __namechaep__, you will have to create the hosted zone and update the name servers.
 
@@ -523,7 +538,7 @@ For detailed read on selecting between CNAME and Alias based records, read the [
 
 ## Visiting the application from the browser
 
-So far, we now have an application running in Kubernetes that is also accessible externally. That means if you navigate to https://tooling.artifactory.sandbox.svc.darey.io/ (_replace the full URL with your domain_), it should load up the artifactory application.
+So far, we now have an application running in Kubernetes that is also accessible externally. That means if you navigate to  https://tooling.artifactory.steghub.com/ (_replace the full URL with your domain_), it should load up the artifactory application.
 
 Using Chrome browser will show something like the below. It shows that the site is indeed reachable, but insecure. This is because Chrome browsers do not load insecure sites by default. It is insecure because it either does not have a trusted TLS/SSL certificate, or it doesn’t have any at all.
 
