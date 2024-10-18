@@ -375,7 +375,7 @@ helm repo update
 Install Nginx Ingress Controller in the ingress-nginx namespace
 
 ```bash
-helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace
 ```
 
 
