@@ -172,22 +172,32 @@ kubectl describe sa cert-manager -n cert-manager
 
 - __Configure RBAC for Cert-Manager `ServiceAccount`__
 
-Use the snippet below
-
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRole
 metadata:
-  name: cert-manager-<service-account-name>-tokenrequest
-  namespace: <service-account-namespace>
+  namespace: cert-manager
+  name: cert-manager
+rules:
+  - apiGroups: [""]
+    resources: ["serviceaccounts", "serviceaccounts/token"]
+    verbs: ["create"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificaterequests"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-acme-binding
 subjects:
   - kind: ServiceAccount
-    name: <cert-manager-service-account-name>
-    namespace: <cert-manager-namespace>
+    name: cert-manager
+    namespace: cert-manager
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: <service-account-name>-tokenrequest
+  kind: ClusterRole
+  name: cert-manager
 ```
 
 We want to Grant permissions across the entire Kubernetes cluster, allowing __cert-manager__ to manage DNS records for our hosted zone across multiple namespaces, rather than Grant permissions within a specific namespace. So we use ClusterRoleBinding and ClusterRole.
@@ -199,7 +209,6 @@ We want to Grant permissions across the entire Kubernetes cluster, allowing __ce
 ```bash
 kubectl apply -f cert-manager-rbac.yaml
 ```
-![](./images/role-binding.png)
 
 4. Install Cert-Manager using Helm
 
