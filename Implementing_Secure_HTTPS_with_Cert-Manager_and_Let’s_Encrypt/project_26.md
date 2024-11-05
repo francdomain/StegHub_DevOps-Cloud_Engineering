@@ -440,3 +440,14 @@ In this project, we've successfully implemented HTTPS for our Artifactory deploy
 - [GitHub - jfrog-platform](https://github.com/jfrog/charts/blob/master/stable/jfrog-platform/values.yaml)
 - [GitHub - ingress-nginx](https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml)
 - [YouTube - Cert Manager Kubernetes Tutorial](https://www.youtube.com/watch?v=7m4_kZOObzw&t=2018s)
+
+
+## Additional Task:
+
+1.  Automate the entire process you performed using __Terraform__ with the [Helm Provider](https://registry.terraform.io/providers/hashicorp/helm/latest) and [Kubernetes Provider](https://registry.terraform.io/providers/hashicorp/kubernetes/latest).
+
+2. Implement SSL/TLS certificates for the previously deployed DevOps tools.
+
+### Click below to see the automation of entire process and implementation of SSL/TLS certificate.
+
+[Automation with Terraform and Helm](https://github.com/francdomain/k8s_with_terraform_and_helm)
