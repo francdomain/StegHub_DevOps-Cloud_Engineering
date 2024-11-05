@@ -450,4 +450,4 @@ In this project, we've successfully implemented HTTPS for our Artifactory deploy
 
 ### Click below to see the automation of entire process and implementation of SSL/TLS certificate.
 
-[Automation with Terraform and Helm](https://github.com/francdomain/k8s_with_terraform_and_helm)
+__[Automation with Terraform and Helm](https://github.com/francdomain/k8s_with_terraform_and_helm)__
